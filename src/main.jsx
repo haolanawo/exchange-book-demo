@@ -4,10 +4,13 @@ import {
   BookOpen,
   CheckCircle2,
   Heart,
+  MapPin,
   Plus,
   Search,
+  ShoppingBag,
   SlidersHorizontal,
   Sparkles,
+  Tag,
   X
 } from 'lucide-react';
 import './styles.css';
@@ -56,6 +59,54 @@ const initialBooks = [
     campus: '西区',
     owner: '许同学',
     note: '想换一本统计学或会计学教材。'
+  }
+];
+
+
+const marketItems = [
+  {
+    id: 1,
+    name: '宿舍折叠小桌',
+    category: '宿舍好物',
+    price: '¥28',
+    condition: '九成新',
+    campus: '东区',
+    seller: '李同学',
+    description: '适合床上学习或追剧，可在东区食堂门口自提。',
+    tag: '今日可取'
+  },
+  {
+    id: 2,
+    name: 'Casio 科学计算器',
+    category: '学习用品',
+    price: '¥35',
+    condition: '八成新',
+    campus: '北区',
+    seller: '王同学',
+    description: '功能正常，送一节备用电池，适合高数和物理考试。',
+    tag: '可小刀'
+  },
+  {
+    id: 3,
+    name: '山地车尾灯套装',
+    category: '出行装备',
+    price: '¥18',
+    condition: '九成新',
+    campus: '南区',
+    seller: '赵同学',
+    description: 'USB 充电，夜骑更安全，另附备用绑带。',
+    tag: '安全装备'
+  },
+  {
+    id: 4,
+    name: '蓝牙键盘',
+    category: '数码配件',
+    price: '¥69',
+    condition: '七成新',
+    campus: '西区',
+    seller: '何同学',
+    description: '轻薄便携，适配平板和电脑，部分按键有使用痕迹。',
+    tag: '热门'
   }
 ];
 
@@ -157,7 +208,46 @@ function App() {
             <span>{wantedCount}</span>
             <p>我想要</p>
           </div>
+          <div>
+            <span>{marketItems.length}</span>
+            <p>二手好物</p>
+          </div>
         </div>
+      </section>
+
+      <section className="market-hero" aria-label="二手市场">
+        <div>
+          <p className="eyebrow">Second-hand Market</p>
+          <h2>校园二手市场</h2>
+          <p>课本之外的闲置物品也能快速流转：宿舍好物、数码配件、学习用品和出行装备集中展示。</p>
+        </div>
+        <button className="market-cta" type="button">
+          <ShoppingBag size={18} />
+          发布闲置
+        </button>
+      </section>
+
+      <section className="market-grid" aria-label="二手商品列表">
+        {marketItems.map((item) => (
+          <article className="market-card" key={item.id}>
+            <div className="market-image" aria-hidden="true">
+              <ShoppingBag size={30} />
+              <span>{item.category}</span>
+            </div>
+            <div className="market-content">
+              <div className="market-head">
+                <span className="market-tag"><Tag size={14} />{item.tag}</span>
+                <strong>{item.price}</strong>
+              </div>
+              <h3>{item.name}</h3>
+              <p>{item.description}</p>
+              <div className="market-meta">
+                <span>{item.condition}</span>
+                <span><MapPin size={14} />{item.campus} · {item.seller}</span>
+              </div>
+            </div>
+          </article>
+        ))}
       </section>
 
       <section className="workspace">
